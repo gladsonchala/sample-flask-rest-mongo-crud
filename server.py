@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
-# Creating a client to connect to MongoDB
+# MongoClientの作成, MongoDBへの接続
 try:
     mongo = pymongo.MongoClient(
         host="localhost",
@@ -103,19 +103,32 @@ def update_user(id_):
         # for attr in dir(result_update):
         #     print(f"***{attr}***")
 
-        return Response(
-            response=json.dumps(
-                {
-                    "message": "Updated : user",
-                    "name_before": result_get_one["name"],
-                    "lastName_before": result_get_one["lastName"],
-                    "name_after": request.form["name"],
-                    "lastName_after": request.form["lastName"],
-                }
-            ),
-            status=200,
-            mimetype="application/json",
-        )
+        print(result_update.modified_count)
+
+        if result_update.modified_count == 1:
+            return Response(
+                response=json.dumps(
+                    {
+                        "message": "Updated : user",
+                        "name_before": result_get_one["name"],
+                        "lastName_before": result_get_one["lastName"],
+                        "name_after": request.form["name"],
+                        "lastName_after": request.form["lastName"],
+                    }
+                ),
+                status=200,
+                mimetype="application/json",
+            )
+        else:
+            return Response(
+                response=json.dumps(
+                    {
+                        "message": "nothing to update",
+                    }
+                ),
+                status=200,
+                mimetype="application/json",
+            )
 
     except Exception as ex:
         print(ex)
