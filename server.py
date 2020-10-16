@@ -42,7 +42,7 @@ def get_users():
         print(ex)
         return Response(
             response=json.dumps({
-                "message": "cannot read users",
+                "message": "Could not read users",
             }),
             status=500,
             mimetype="application/json",
@@ -63,7 +63,7 @@ def create_user():
 
         return Response(
             response=json.dumps({
-                "message": "user created",
+                "message": "Created : user",
                 "id": f"{db_response.inserted_id}",
             }),
             status=200,
@@ -72,6 +72,13 @@ def create_user():
 
     except Exception as ex:
         print(ex)
+        return Response(
+            response=json.dumps({
+                "message": "Could not create a user",
+            }),
+            status=500,
+            mimetype="application/json",
+        )
 
 
 # ユーザー情報の更新
@@ -99,7 +106,7 @@ def update_user(id_):
         return Response(
             response=json.dumps(
                 {
-                    "message": "user updated",
+                    "message": "Updated : user",
                     "name_before": result_get_one["name"],
                     "lastName_before": result_get_one["lastName"],
                     "name_after": request.form["name"],
@@ -113,7 +120,7 @@ def update_user(id_):
     except Exception as ex:
         print(ex)
         return Response(
-            response=json.dumps({"message": "cannot update user"}),
+            response=json.dumps({"message": "Could not update user"}),
             status=500,
             mimetype="application/json",
         )
