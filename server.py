@@ -15,6 +15,7 @@ try:
     db = mongo.company
     # print(mongo.server_info())
 
+
 except Exception as e:
     print("ERROR - Cannot connect to db", e)
 
@@ -31,9 +32,7 @@ def get_users():
             user["_id"] = str(user["_id"])
 
         return Response(
-            response=json.dumps(
-                db_response
-            ),
+            response=json.dumps(db_response),
             status=200,
             mimetype="application/json",
         )
@@ -41,9 +40,11 @@ def get_users():
     except Exception as ex:
         print(ex)
         return Response(
-            response=json.dumps({
-                "message": "Could not read users",
-            }),
+            response=json.dumps(
+                {
+                    "message": "Could not read users",
+                }
+            ),
             status=500,
             mimetype="application/json",
         )
@@ -62,10 +63,12 @@ def create_user():
         db_response = db.users.insert_one(user)
 
         return Response(
-            response=json.dumps({
-                "message": "Created : user",
-                "id": f"{db_response.inserted_id}",
-            }),
+            response=json.dumps(
+                {
+                    "message": "Created : user",
+                    "id": f"{db_response.inserted_id}",
+                }
+            ),
             status=200,
             mimetype="application/json",
         )
@@ -73,9 +76,11 @@ def create_user():
     except Exception as ex:
         print(ex)
         return Response(
-            response=json.dumps({
-                "message": "Could not create a user",
-            }),
+            response=json.dumps(
+                {
+                    "message": "Could not create a user",
+                }
+            ),
             status=500,
             mimetype="application/json",
         )
@@ -97,7 +102,7 @@ def update_user(id_):
                     "name": request.form["name"],
                     "lastName": request.form["lastName"],
                 }
-            }
+            },
         )
 
         # for attr in dir(result_update):
@@ -123,7 +128,7 @@ def update_user(id_):
             return Response(
                 response=json.dumps(
                     {
-                        "message": "nothing to update",
+                        "message": "Nothing to update",
                     }
                 ),
                 status=200,
@@ -134,6 +139,48 @@ def update_user(id_):
         print(ex)
         return Response(
             response=json.dumps({"message": "Could not update user"}),
+            status=500,
+            mimetype="application/json",
+        )
+
+
+# ユーザーの削除
+@app.route("/users/<id_>", methods=["DELETE"])
+def delete_user(id_):
+    try:
+
+        result_delete = db.users.delete_one({"_id": ObjectId(id_)})
+
+        # for attr in dir(result_delete):
+        #     print(f"***{attr}***")
+
+        if result_delete.deleted_count == 1:
+            return Response(
+                response=json.dumps(
+                    {
+                        "message": "Deleted : user",
+                        "id": f"{id_}",
+                    }
+                ),
+                status=200,
+                mimetype="application/json",
+            )
+        else:
+            return Response(
+                response=json.dumps(
+                    {
+                        "message": "User ID that does not exist",
+                        "id": f"{id_}",
+                    }
+                ),
+                status=200,
+                mimetype="application/json",
+            )
+
+    except Exception as ex:
+        print(ex)
+        return Response(
+            response=json.dumps({"message": "Could not delete user"}),
             status=500,
             mimetype="application/json",
         )
