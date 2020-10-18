@@ -1,12 +1,11 @@
 # Flask + MongoDB で REST API (CRUD) 
 
-MongoDB Community Server がローカルで動いている前提。
-
-- [MongoDB Community Download](https://www.mongodb.com/try/download/community)
+- [MongoDB Community Server](https://www.mongodb.com/try/download/community) をローカルで動かして開発。
+- MongoDB Atlas に接続する場合は `server.py` のコメントアウト参照
 
 ## 📝開発環境
 
-- MongoDB 4.4.1 Community
+- MongoDB 4.4.1 Community Server
 - Python 3.8.6
 - Flask 1.1.2
 - pymongo 3.11.0
@@ -49,6 +48,8 @@ pipenv --python 3.8.6
 ```bash
 pipenv install flask
 pipenv install pymongo
+pipenv install dnspython
+pipenv install python-dotenv
 ```
 
 ## 📝動作確認
