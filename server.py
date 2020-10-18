@@ -12,7 +12,6 @@ app = Flask(__name__)
 
 # MongoClientの作成, MongoDBへの接続
 try:
-
     # *** When using MongoDB local server ***
     mongo = pymongo.MongoClient(
         host="localhost",
