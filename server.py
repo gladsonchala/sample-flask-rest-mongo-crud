@@ -1,19 +1,34 @@
-from flask import Flask, Response, request
-import pymongo
 import json
+import os
+
+import pymongo
 from bson.objectid import ObjectId
+from dotenv import load_dotenv
+from flask import Flask, Response, request
+
+load_dotenv()
 
 app = Flask(__name__)
 
 # MongoClientの作成, MongoDBへの接続
 try:
+
+    # *** When using MongoDB local server ***
     mongo = pymongo.MongoClient(
         host="localhost",
         port=27017,
         serverSelectionTimeoutMS=1000,
     )
+
+    # *** When using MongoDB Atlas ***
+    # MONGO_USERNAME = os.environ["MONGO_USERNAME"]
+    # MONGO_PASSWORD = os.environ["MONGO_PASSWORD"]
+    # MONGO_HOSTNAME = os.environ["MONGO_HOSTNAME"]
+    # mongo = pymongo.MongoClient(
+    #     f"mongodb+srv://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOSTNAME}"
+    # )
+
     db = mongo.company
-    # print(mongo.server_info())
 
 
 except Exception as e:
