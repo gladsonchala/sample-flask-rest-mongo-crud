@@ -30,7 +30,6 @@ try:
 
     db = mongo.company
 
-
 except Exception as e:
     print("ERROR - Cannot connect to db", e)
 
