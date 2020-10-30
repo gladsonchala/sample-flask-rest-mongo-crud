@@ -25,7 +25,7 @@
 ### Clone
 
 ```bash
-git clone https://github.com/kiyotd/flask-mongo-rest-crud.git
+git clone https://github.com/kiyotd/sample-flask-rest-mongo-crud.git
 ```
 
 ### Creating a virtual environment and installing modules
