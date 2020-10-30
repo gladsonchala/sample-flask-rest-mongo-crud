@@ -1,16 +1,17 @@
-# Flask + MongoDB で REST API (CRUD) 
+# README
 
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community) をローカルで動かして開発。
-- MongoDB Atlas に接続する場合は `server.py` のコメントアウト参照
+## Description
 
-## 📝開発環境
+- MongoDB へと CRUD を行う REST API を Flask で実装したサンプルプロジェクトです。
 
-- MongoDB 4.4.1 Community Server
+## Requirement
+
+- [MongoDB 4.4.1 Community Server](https://www.mongodb.com/try/download/community)
 - Python 3.8.6
 - Flask 1.1.2
 - pymongo 3.11.0
 
-## 📝API エンドポイント
+## REST API endpoint
 
 |method|path|-|
 |---|---|---|
@@ -19,43 +20,43 @@
 |PATCH|/users/ユーザーID|ユーザーの情報を更新|
 |DELETE|/users/ユーザーID|ユーザーを削除|
 
-## 📝プロジェクトディレクトリの作成
+## Getting Started
+
+### Clone
 
 ```bash
-mkdir flask-mongo-1
-cd flask-mongo-1
+git clone https://github.com/kiyotd/flask-mongo-rest-crud.git
 ```
 
-## 📝Python 仮想環境の作成
-
-### 🔖プロジェクト直下に仮想環境を作成したい場合の設定
-
-~/.bashrc
-
-```text
-# .venv をプロジェクトローカルに作る
-export PIPENV_VENV_IN_PROJECT=true
-```
-
-### 🔖仮想環境の作成
+### Creating a virtual environment and installing modules
 
 ```bash
-pipenv --python 3.8.6
+cd flask-mongo-rest-crud
+pipenv install
 ```
 
-## 📝ライブラリのインストール
+### Runs the app
 
 ```bash
-pipenv install flask
-pipenv install pymongo
-pipenv install dnspython
-pipenv install python-dotenv
+pipenv run python server.py
 ```
 
-## 📝動作確認
+[Postman](https://www.postman.com/downloads/) のインストールを行い、API のエンドポイントにリクエストを送信して動作を確認する。
 
-```bash
-python server.py
-```
+### When connecting to the MongoDB Atlas
 
-Postman で API にアクセスして動作確認
+- `server.py` のコメントアウト参照
+
+
+## Licence
+
+The MIT License
+
+## Author
+
+**kiyotd**  
+web designer, front-end engineer
+
+- [kiyotd.com](https://kiyotd.com/)
+- [twitter](https://twitter.com/_kiyotd)
+- [github](https://github.com/kiyotd)
